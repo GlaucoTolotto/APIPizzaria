@@ -1,4 +1,4 @@
-package com.example.APIPizzaria;
+package com.company.APIPizzaria;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,5 +9,4 @@ public class ApiPizzariaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ApiPizzariaApplication.class, args);
 	}
-
 }
