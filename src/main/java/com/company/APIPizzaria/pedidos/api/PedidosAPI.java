@@ -5,35 +5,36 @@ import com.company.APIPizzaria.pedidos.facade.PedidosFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bing.annotation.PostMapping;
-import org.springframework.web.bing.annotation.GetMapping;
-import org.springframework.web.bing.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bing.annotation.RequestBody;
-import org.springframework.web.bing.annotation.RequestMapping;
-import org.springframework.web.bing.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import java.util.ArrayList;
 
 @Controller
-@RequestMapping(values = "/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PedidosAPI {
     @Autowired
     private PedidosFacade pedidosFacade;
 
     @PostMapping
     @ResponseBody
-    public PedidoDTO criar(@RequestBody PedidoDTO pedidoDTO) {
-      return pedidosFacade.criar(pedidosFacade);
+    public void criar(@RequestBody PedidoDTO pedidoDTO) {
+       pedidosFacade.criar(pedidoDTO);
     }
 
     @GetMapping
     @ResponseBody
-    public List<PedidoDTO> getlAll(@RequestBody PedidoDTO pedidoDTO) {
-      return pedidosFacade.getAll();
+    public void getlAll(@RequestBody PedidoDTO pedidoDTO) {
+       pedidosFacade.getAll();
     }
 
     @DeleteMapping("/{pedidoId}")
     @ResponseBody
-    public String deletar(@PathVariable("pedidoId") Long pedidoId) {
-      return pedidosFacade.delete(pedidoId);
+    public void deletar(@PathVariable("pedidoId") Long pedidoId) {
+        pedidosFacade.delete(pedidoId);
     }
 }

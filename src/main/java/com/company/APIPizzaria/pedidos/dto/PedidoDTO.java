@@ -1,17 +1,17 @@
 package com.company.APIPizzaria.pedidos.dto;
+import com.company.APIPizzaria.pedidos.dto.PedidoType;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "PEDIDO")
 public class PedidoDTO {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", nullable = false)
     private Long id;
-    private PedidoType pedido;
-    
+    @Column(name = "PEDIDO", length = 50, nullable = false)
+    private String pedido;
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
-
-public class PedidoType {
-    private int valor;
-    private ArrayList<PrudutoType> produtos;
-}
-
-public class PrudutoType {
-    private String produtoName;
-    private int qtd; 
-} 

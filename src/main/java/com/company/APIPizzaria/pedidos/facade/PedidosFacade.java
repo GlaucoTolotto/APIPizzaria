@@ -1,30 +1,37 @@
 package com.company.APIPizzaria.pedidos.facade;
 
 import com.company.APIPizzaria.pedidos.dto.PedidoDTO;
+import com.company.APIPizzaria.pedidos.repository.PedidoRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class PedidosFacade {
     private static final Map<Long, PedidoDTO> pedidos = new HashMap<>();
+    private final PedidoRepository repository;
 
-    public PedidoDTO criar(PedidoDTO pedidosDto){
-        Long proximoId = pedidos.keySet().size() + 1L;
-        pedidosDto.setId(proximoId);
-        pedidos.put(proximoId, pedidosDto);
+    public PedidosFacade(PedidoRepository repository) {
+        this.repository = repository;
     }
 
-    public PedidoDTO getById(Long pedidoId){
-        return pedidos.get(pedidoId);
+    public void criar(PedidoDTO pedidosDto) {
+        // Long proximoId = pedidos.keySet().size() + 1L;
+        // pedidosDto.setId(proximoId);
+        // pedidos.put(proximoId, pedidosDto);
+        repository.save(pedidosDto);
     }
 
-    public List<PedidoDTO> getAll(){
-        return new ArrayList<>(pedidos.values());
+    public Optional<PedidoDTO> getById(Long pedidoId) {
+        return repository.findById(pedidoId);
     }
 
-    public String delete(Long pedidoId){
-        pedidos.remove(pedidoId);
+    public List<PedidoDTO> getAll() {
+        // new ArrayList<>(pedidos.values());
+        return repository.findAll();
+    }
+
+    public void delete(Long pedidoId) {
+        repository.deleteById(pedidoId);
     }
 }
